@@ -7,38 +7,39 @@ export default function Films(props) {
     const {color,setColor} = useContext(MyContext);
     const [loading, setLoading] = useState(false);
     const [selectedRowKey, setSelectedRowKey] = useState([0]);
-
-    const data = [
-        {
-          key: '1',
-          name: 'John Brown',
-          age: 32,
-          address: 'New York No. 1 Lake Park',
-        },
-        {
-          key: '2',
-          name: 'Jim Green',
-          age: 42,
-          address: 'London No. 1 Lake Park',
-        },
-        {
-          key: '3',
-          name: 'Joe Black',
-          age: 32,
-          address: 'Sydney No. 1 Lake Park',
-        },
-        {
-          key: '4',
-          name: 'Disabled User',
-          age: 99,
-          address: 'Sydney No. 1 Lake Park',
-        },
-      ];
+    const [listOfFilms, setListOfFilms]= useState([]);
+    useEffect(() => {
+        fetch(
+        "https://api.themoviedb.org/3/movie/popular?api_key=ccb8c4972a273f9f96b565be82743d4c"
+        )
+        .then((response) => response.json())
+        .then((data) => {
+            // add a unique key value to each film object
+            const films = data.results.map((film, index) => {
+                return {
+                    ...film,
+                    key: index.toString(),
+                };
+            });
+            setListOfFilms(films);
+        });
+    }, []);
 
       const columns = [
+        // {
+        //   title: 'Id',
+        //   dataIndex: 'id',
+        //   key:'id'
+        // },
         {
           title: 'Name',
-          dataIndex: 'name',
+          dataIndex: 'title',
+          //key:'title'
+        },
+        {
+            title:"Nota",
+            dataIndex:"vote_average",
+            //key:'vote_average'
         }
       ];
 
@@ -46,14 +47,12 @@ export default function Films(props) {
         selectedRowKeys: selectedRowKey,
         
         onChange: (selectedRowKeys, selectedRows) => {
+            console.log(selectedRowKeys);
             setSelectedRowKey(selectedRowKeys);
         },
   
         onSelect: (record, selected, selectedRows) => {
-            getDataOnRow(record);
-        },
-  
-        onSelectAll: (selected, selectedRows, changeRows) => {
+            console.log(record);
         },
         type: "radio",
     };
@@ -61,23 +60,32 @@ export default function Films(props) {
     //recoger información de la linea seleccionada
     async function getDataOnRow(row) {
       console.log(row)
-    //   //rellenar cuadro de propiedades
+      //rellenar cuadro de propiedades
     //   let index = listOfArticles.indexOf(row);
     //   let props = [];
     //   row?props.push(<RenderArticleData key={parseInt(row.id_article)} id={parseInt(row.id_article)} name={row.name} article={row} rowNumber={parseInt(index)} reChargePage={getALLArticles} ></RenderArticleData>):props.push(<RenderArticleData key={0} id={0} name={""} ></RenderArticleData>);
     //   setPropiedades(props);
     }
   
-    const clickRowNew = (row, b) => {
-      
-      const index = data.indexOf(row);
-      if(index>9){
-          setSelectedRowKey([parseInt(index%10)]);
-      }else{
-          setSelectedRowKey([index]);
-      }
-      getDataOnRow(row);
-    };
+    const clickRowNew = (row) => {
+        console.log("hola");
+        const index = listOfFilms.indexOf(row);
+        
+        if(index>4){
+            setSelectedRowKey([parseInt(index%5)]);
+        }else{
+            setSelectedRowKey([index]);
+        }
+        //getDataOnRow(row);
+        //console.log(row);
+        // if(index > 9){
+        //   setSelectedRowKey([parseInt(index%10)]);
+        // } else {
+        //     setSelectedRowKey([index]);
+        // }
+        //setSelectedRowKey([index]);
+        //getDataOnRow(row);
+      };
     return(
         <>
         <Row>
@@ -86,12 +94,12 @@ export default function Films(props) {
         <Row>
             <Col span={8} style={{backgroundColor:"ligthgray", width:"100%", display:"inline",padding:"50px",boxShadow:"box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24)"}}>
             <Table
-                    dataSource={data}
+                    dataSource={listOfFilms}
                     columns={columns}
                     rowSelection={rowSelectionNew}
-                    //onClick={() => clickRowNew}
+                    onClick={clickRowNew}
                     pagination={{
-                    pageSize: 10,
+                    pageSize: 5,
                     }}
                 />
             </Col>
