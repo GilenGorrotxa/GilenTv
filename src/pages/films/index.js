@@ -8,6 +8,8 @@ export default function Films(props) {
     const [loading, setLoading] = useState(false);
     const [selectedRowKey, setSelectedRowKey] = useState([0]);
     const [listOfFilms, setListOfFilms]= useState([]);
+    const [title, setTitle] = useState("");
+    const [desc, setDesc] = useState("");
     useEffect(() => {
         fetch(
         "https://api.themoviedb.org/3/movie/popular?api_key=ccb8c4972a273f9f96b565be82743d4c"
@@ -48,18 +50,20 @@ export default function Films(props) {
         
         onChange: (selectedRowKeys, selectedRows) => {
             console.log(selectedRowKeys);
+            setTitle(listOfFilms[selectedRowKey].title)
+            setDesc(listOfFilms[selectedRowKey].overview);
             setSelectedRowKey(selectedRowKeys);
         },
   
         onSelect: (record, selected, selectedRows) => {
-            console.log(record);
+            //console.log(record);
         },
         type: "radio",
     };
   
     //recoger información de la linea seleccionada
     async function getDataOnRow(row) {
-      console.log(row)
+      //console.log(row)
       //rellenar cuadro de propiedades
     //   let index = listOfArticles.indexOf(row);
     //   let props = [];
@@ -89,9 +93,9 @@ export default function Films(props) {
     return(
         <>
         <Row>
-        <Col span={24}><h1>GILENTV</h1></Col>
+        <Col span={24} style={{display:"flex",justifyContent:"center", textAlign:"center"}}><><h1>GILENTV</h1></></Col>
         </Row>
-        <Row>
+        <Row >
             <Col span={8} style={{backgroundColor:"ligthgray", width:"100%", display:"inline",padding:"50px",boxShadow:"box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24)"}}>
             <Table
                     dataSource={listOfFilms}
@@ -103,11 +107,20 @@ export default function Films(props) {
                     }}
                 />
             </Col>
-            <Col span={16} style={{backgroundColor:"ligthgray", width:"100%", display:"inline",padding:"50px",boxShadow:"box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24)"}}>
+            <Col span={14} style={{backgroundColor:"ligthgray", width:"100%", display:"inline",padding:"50px",boxShadow:"box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24)"}}>
             <Card
                 style={{boxShadow:"0 8px 8px -2px lightgray", backgroundColor:"whitesmoke"}}
                 title={"Nombre de la peli"}
             >
+                <Row style={{padding:"50px"}}>
+                <Card
+                        hoverable
+                        style={{ width: "100%" }}
+                        cover={<img alt="example" style={{height:"auto",width:"100%"}} src="https://about.netflix.com/images/meta/netflix-symbol-black.png" />}
+                    >
+                        <Meta title={title} description={desc} />
+                    </Card>
+                </Row>
                 <Row gutter={16}>
                     <Col span={6}>
                     <Card
