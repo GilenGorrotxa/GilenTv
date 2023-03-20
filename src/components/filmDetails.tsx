@@ -17,6 +17,7 @@ export default function RenderFilmCardTsx(props) {
     const [img, setImg] = useState<string>("");
 
     useEffect(() => {
+        /* Update the information of the details card with the props and create the list of recommended films*/
         let recomend = props.films.map(film => ({ title: film.title, img: film.backdrop_path, desc:film.overview }));
         setFilms(recomend);
         setTitle(props.title?props.title:"");

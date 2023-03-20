@@ -20,6 +20,7 @@ export default function FilmsTsx(props: Props) {
   const [desc, setDesc] = useState<string>("");
   const [img, setImg] = useState<string>("");
 
+  /* Get the list of the films from the API*/
   useEffect(() => {
     fetch(
       "https://api.themoviedb.org/3/movie/popular?api_key=ccb8c4972a273f9f96b565be82743d4c"
@@ -33,9 +34,6 @@ export default function FilmsTsx(props: Props) {
           };
         });
         setListOfFilms(films);
-        setTitle(films[0].title);
-        setDesc(films[0].overview);
-        setImg(films[0].backdrop_path);
       });
   }, []);
 
@@ -54,11 +52,13 @@ export default function FilmsTsx(props: Props) {
     <>
       <Row style={{marginTop:50,marginBottom:50}}>
         <Col xs={24} xl={8} style={{backgroundColor:"ligthgray", width:"100%",display:"flex", justifyContent:"center"}}>
+          {/* List of the most popular films */}
           <Table
             dataSource={listOfFilms}
             columns={columns}
             rowSelection={{
               type:'radio',
+              /* Change the information of the details card with the information of the selected film*/
               onChange:((selectedRowKeys: any, selectedRows: Film[]) => {
                 setTitle(listOfFilms[parseInt(selectedRowKeys[0])].title);
                 setDesc(listOfFilms[parseInt(selectedRowKeys[0])].overview);
@@ -72,8 +72,10 @@ export default function FilmsTsx(props: Props) {
           />
         </Col>
         <Col xs={24} xl={14}  style={{backgroundColor:"ligthgray", display:"flex", justifyContent:"center",boxShadow:"box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24)"}}>
+          {/* Show the detail card of the selected film or show the main page with a crousel of images */}
           {selected
-          ?<RenderFilmCardTsx img={img} title={title} desc={desc} films={listOfFilms}/>
+          ?
+          <RenderFilmCardTsx img={img} title={title} desc={desc} films={listOfFilms}/>
           :<>
             <Card
                   style={{boxShadow:"0 8px 8px -2px lightgray", backgroundColor:"whitesmoke",width:"90%", textAlign:"center"}}
