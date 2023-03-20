@@ -1,19 +1,16 @@
-import React, { useState, useCallback, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import MyContext from "../../context/appcontext";
 import '../../App.css';
-import logo from '../../logo.svg';
 import { Button} from "antd";
 
 export default function Home(props) {
     const {color,setColor} = useContext(MyContext);
     return(
         <>
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <h1>{color}</h1>
-                <input type="text" value={color} onChange={(e)=> setColor(e.target.value)}/>
-                <Button type="primary" href="/films">VER PELIS</Button>
+        <div className="App" >
+            <header className="App-header" style={{backgroundColor:"#e5e5e5"}}>
+                <img src="https://picemup.com/img/logoWebGilenTv.png"  alt="logo" style={{maxWidth:500,marginBottom:0}}/>
+                <Button type="primary" href="/films" style={{backgroundColor:"black",color:"white",fontWeight:"bold"}}>WATCH MOVIES</Button>
             </header>
         </div>
         </>

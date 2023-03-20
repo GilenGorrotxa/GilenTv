@@ -13,12 +13,17 @@ export default function RenderFilmCard(props) {
 
     useEffect(() => {
         let recomend = props.films.map(film => ({ title: film.title, img: film.backdrop_path, desc:film.overview }));
-        console.log(recomend)
         setFilms(recomend);
         setTitle(props.title?props.title:"");
         setDesc(props.desc?props.desc:"")
         setImg(props.desc?"https://image.tmdb.org/t/p/w500/"+props.img:"https://picemup.com/img/logoRecomend.jpg")
     }, [props]);
+
+    function changeFilm(num){
+        setTitle(films[num].title);
+        setDesc(films[num].desc);
+        setImg(films[num].img);
+    }
     return(
         <Card
                 style={{boxShadow:"0 8px 8px -2px lightgray", backgroundColor:"whitesmoke"}}

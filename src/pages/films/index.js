@@ -18,7 +18,6 @@ export default function Films(props) {
         )
         .then((response) => response.json())
         .then((data) => {
-            // add a unique key value to each film object
             const films = data.results.map((film, index) => {
                 return {
                     ...film,
@@ -34,20 +33,13 @@ export default function Films(props) {
     }, []);
 
       const columns = [
-        // {
-        //   title: 'Id',
-        //   dataIndex: 'id',
-        //   key:'id'
-        // },
         {
           title: 'Name',
           dataIndex: 'title',
-          //key:'title'
         },
         {
             title:"Nota",
             dataIndex:"vote_average",
-            //key:'vote_average'
         }
       ];
 
@@ -66,21 +58,8 @@ export default function Films(props) {
         type: "radio",
     };
   
-    //recoger información de la linea seleccionada
-    async function getDataOnRow(row) {
-      //console.log(row)
-      //rellenar cuadro de propiedades
-    //   let index = listOfArticles.indexOf(row);
-    //   let props = [];
-    //   row?props.push(<RenderArticleData key={parseInt(row.id_article)} id={parseInt(row.id_article)} name={row.name} article={row} rowNumber={parseInt(index)} reChargePage={getALLArticles} ></RenderArticleData>):props.push(<RenderArticleData key={0} id={0} name={""} ></RenderArticleData>);
-    //   setPropiedades(props);
-    }
-  
     return(
         <>
-        <Row >
-        <Col span={24} style={{display:"flex",justifyContent:"center", textAlign:"center"}}><><img src="https://picemup.com/img//logoGilenTv.png" style={{width:"400px",marginTop:"50px"}} /></></Col>
-        </Row>
         <Row style={{marginTop:50,marginBottom:50}}>
             <Col span={8} style={{backgroundColor:"ligthgray", width:"100%",display:"flex", justifyContent:"center"}}>
             <Table
