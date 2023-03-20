@@ -53,7 +53,7 @@ export default function FilmsTsx(props: Props) {
   return(
     <>
       <Row style={{marginTop:50,marginBottom:50}}>
-        <Col span={8} style={{backgroundColor:"ligthgray", width:"100%",display:"flex", justifyContent:"center"}}>
+        <Col xs={24} xl={8} style={{backgroundColor:"ligthgray", width:"100%",display:"flex", justifyContent:"center"}}>
           <Table
             dataSource={listOfFilms}
             columns={columns}
@@ -71,24 +71,24 @@ export default function FilmsTsx(props: Props) {
             }}
           />
         </Col>
-        <Col span={14} style={{backgroundColor:"ligthgray", display:"flex", justifyContent:"center",boxShadow:"box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24)"}}>
+        <Col xs={24} xl={14}  style={{backgroundColor:"ligthgray", display:"flex", justifyContent:"center",boxShadow:"box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24)"}}>
           {selected
           ?<RenderFilmCardTsx img={img} title={title} desc={desc} films={listOfFilms}/>
           :<>
             <Card
-                  style={{boxShadow:"0 8px 8px -2px lightgray", backgroundColor:"whitesmoke",width:"100%", textAlign:"center"}}
+                  style={{boxShadow:"0 8px 8px -2px lightgray", backgroundColor:"whitesmoke",width:"90%", textAlign:"center"}}
                   title={<img alt="logo" src="https://picemup.com/img//logoGilenTvBlanco.png" style={{width:"120px"}}/>}
               >
                 <div style={{display:"flex", justifyContent:"center",marginTop:20,marginBottom:20}}>
-                  <div>
+                  <div >
                     <h1>WELCOME TO GILENTV!</h1>
-                    <p style={{width:500,textAlign:"center"}}>On this page you can find information about the most popular movies of the moment. <b>To find out information about any of the movies, select any of them from the list on the left.</b></p>
+                    <p style={{maxWidth:500,width:"100%",textAlign:"center"}}>On this page you can find information about the most popular movies of the moment. <b>To find out information about any of the movies, select any of them from the list.</b></p>
                   </div>
                 </div>
                 <Carousel effect="fade" style={{marginBottom:50}} autoplay>
                   {listOfFilms.map(
                         (film: Film, index: number) => {
-                            return <div><Image key={film.key} alt={film.title} src={"https://image.tmdb.org/t/p/w500/"+film.backdrop_path} style={{width:"400px",borderRadius:"5px"}}/></div>;
+                            return <><Image key={film.key} alt={film.title} src={"https://image.tmdb.org/t/p/w500/"+film.backdrop_path} style={{width:"400px",borderRadius:"5px"}}/></>;
                         }
                     )}
                   </Carousel>
