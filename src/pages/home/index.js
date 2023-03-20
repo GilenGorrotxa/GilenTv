@@ -1,10 +1,7 @@
-import React, { useContext } from "react";
-import MyContext from "../../context/appcontext";
 import '../../App.css';
 import { Button} from "antd";
 
 export default function Home(props) {
-    const {color,setColor} = useContext(MyContext);
     return(
         <>
         <div className="App" >

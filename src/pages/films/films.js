@@ -2,16 +2,17 @@ import React, { useState, useCallback, useEffect, useContext } from "react";
 import MyContext from "../../context/appcontext";
 import "./style.css"
 import RenderFilmCard from "../../components/gilentv";
-import { Icon, Row, Col, Table, Input, Divider, Radio, Spin, Tooltip, Popconfirm, Card, notification } from "antd";
-const { Meta } = Card;
+import { Row, Col, Table,Card } from "antd";
+
 export default function Films(props) {
     const {color,setColor} = useContext(MyContext);
     const [loading, setLoading] = useState(false);
-    const [selectedRowKey, setSelectedRowKey] = useState([0]);
+    const [selectedRowKey, setSelectedRowKey] = useState("0");
     const [listOfFilms, setListOfFilms]= useState([]);
     const [title, setTitle] = useState("");
     const [desc, setDesc] = useState("");
     const [img, setImg] = useState("");
+
     useEffect(() => {
         fetch(
         "https://api.themoviedb.org/3/movie/popular?api_key=ccb8c4972a273f9f96b565be82743d4c"
@@ -28,7 +29,7 @@ export default function Films(props) {
             setTitle(films[0].title);
             setDesc(films[0].overview);
             setImg(films[0].backdrop_path);
-            setSelectedRowKey([0]);
+            setSelectedRowKey("0");
         });
     }, []);
 

@@ -2,8 +2,8 @@ html {
     background-color: #e5e5e5;
   }
 .ant-tabs-tab {
-    color: white !important;
-  }
+color: white !important;
+}
   
 .ant-tabs-tab-active {
     color: #E30512 !important;

@@ -2,12 +2,19 @@ import React, { useState, useEffect } from "react";
 import { Row, Col,Card} from "antd";
 const { Meta } = Card;
 
-export default function RenderFilmCard(props) {
+interface Film {
+    title: string;
+    backdrop_path: string;
+    overview: string;
+    img:string;
+}
+
+export default function RenderFilmCardTsx(props) {
     
-    const [films, setFilms] = useState([]);
-    const [title, setTitle] = useState("");
-    const [desc, setDesc] = useState("");
-    const [img, setImg] = useState("");
+    const [films, setFilms] = useState<Film[]>([]);
+    const [title, setTitle] = useState<string>("");
+    const [desc, setDesc] = useState<string>("");
+    const [img, setImg] = useState<string>("");
 
     useEffect(() => {
         let recomend = props.films.map(film => ({ title: film.title, img: film.backdrop_path, desc:film.overview }));
