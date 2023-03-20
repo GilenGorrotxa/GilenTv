@@ -27,7 +27,7 @@ export default function RenderFilmCardTsx(props) {
     return(
         <Card
                 style={{boxShadow:"0 8px 8px -2px lightgray", backgroundColor:"whitesmoke"}}
-                title={<img src="https://picemup.com/img//logoGilenTvBlanco.png" style={{width:"120px"}}/>}
+                title={<img alt="logo" src="https://picemup.com/img//logoGilenTvBlanco.png" style={{width:"120px"}}/>}
             >
                 <Row style={{display:"flex", justifyContent:"center",textAlign:"left",marginBottom:"50px", marginTop:"50px"}}>
                     <>

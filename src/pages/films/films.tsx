@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./style.css"
-import { Row, Col, Table, Card } from "antd";
+import { Row, Col, Table, Card, Carousel,Image  } from "antd";
 import RenderFilmCardTsx from "../../components/filmDetails.tsx";
 
 interface Film {
@@ -14,8 +14,7 @@ interface Film {
 interface Props {}
 
 export default function FilmsTsx(props: Props) {
-  const [loading, setLoading] = useState<boolean>(false);
-  const [selectedRowKey, setSelectedRowKey] = useState<string>("0");
+  const [selected, setSelected] = useState<boolean>(false);
   const [listOfFilms, setListOfFilms]= useState<Film[]>([]);
   const [title, setTitle] = useState<string>("");
   const [desc, setDesc] = useState<string>("");
@@ -37,7 +36,6 @@ export default function FilmsTsx(props: Props) {
         setTitle(films[0].title);
         setDesc(films[0].overview);
         setImg(films[0].backdrop_path);
-        setSelectedRowKey("0");
       });
   }, []);
 
@@ -52,19 +50,6 @@ export default function FilmsTsx(props: Props) {
     }
   ];
 
-  const rowSelectionNew = {
-    selectedRowKeys: selectedRowKey,
-    onChange: (selectedRowKeys: string[], selectedRows: Film[]) => {
-      setTitle(listOfFilms[parseInt(selectedRowKeys[0])].title);
-      setDesc(listOfFilms[parseInt(selectedRowKeys[0])].overview);
-      setImg(listOfFilms[parseInt(selectedRowKeys[0])].backdrop_path);
-      console.log(selectedRowKeys[0]);
-      setSelectedRowKey(selectedRowKeys[0]);
-    },
-    onSelect: (record: Film, selected: boolean, selectedRows: Film[]) => {},
-    type: 'radio' as const, 
-  };
-  
   return(
     <>
       <Row style={{marginTop:50,marginBottom:50}}>
@@ -72,14 +57,43 @@ export default function FilmsTsx(props: Props) {
           <Table
             dataSource={listOfFilms}
             columns={columns}
-            rowSelection={rowSelectionNew}
+            rowSelection={{
+              type:'radio',
+              onChange:((selectedRowKeys: any, selectedRows: Film[]) => {
+                setTitle(listOfFilms[parseInt(selectedRowKeys[0])].title);
+                setDesc(listOfFilms[parseInt(selectedRowKeys[0])].overview);
+                setImg(listOfFilms[parseInt(selectedRowKeys[0])].backdrop_path);
+                setSelected(true);
+              }) 
+            }}
             pagination={{
-              pageSize: 10,
+              pageSize: 5,
             }}
           />
         </Col>
         <Col span={14} style={{backgroundColor:"ligthgray", display:"flex", justifyContent:"center",boxShadow:"box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24)"}}>
-          <RenderFilmCardTsx img={img} title={title} desc={desc} films={listOfFilms}/>
+          {selected
+          ?<RenderFilmCardTsx img={img} title={title} desc={desc} films={listOfFilms}/>
+          :<>
+            <Card
+                  style={{boxShadow:"0 8px 8px -2px lightgray", backgroundColor:"whitesmoke",width:"100%", textAlign:"center"}}
+                  title={<img alt="logo" src="https://picemup.com/img//logoGilenTvBlanco.png" style={{width:"120px"}}/>}
+              >
+                <div style={{display:"flex", justifyContent:"center",marginTop:20,marginBottom:20}}>
+                  <div>
+                    <h1>WELCOME TO GILENTV!</h1>
+                    <p style={{width:500,textAlign:"center"}}>On this page you can find information about the most popular movies of the moment. <b>To find out information about any of the movies, select any of them from the list on the left.</b></p>
+                  </div>
+                </div>
+                <Carousel effect="fade" style={{marginBottom:50}} autoplay>
+                  {listOfFilms.map(
+                        (film: Film, index: number) => {
+                            return <div><Image key={film.key} alt={film.title} src={"https://image.tmdb.org/t/p/w500/"+film.backdrop_path} style={{width:"400px",borderRadius:"5px"}}/></div>;
+                        }
+                    )}
+                  </Carousel>
+            </Card>
+          </>}
         </Col>
       </Row>
     </>
