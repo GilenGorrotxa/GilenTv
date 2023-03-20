@@ -112,51 +112,61 @@ export default function Films(props) {
                 style={{boxShadow:"0 8px 8px -2px lightgray", backgroundColor:"whitesmoke"}}
                 title={"Nombre de la peli"}
             >
-                <Row style={{padding:"50px"}}>
-                <Card
+                <Row style={{display:"flex", justifyContent:"center",textAlign:"left",marginBottom:"50px", marginTop:"50px"}}>
+                    <>
+                    <Card
                         hoverable
-                        style={{ width: "100%" }}
+                        style={{ width: "100%", maxWidth:"500px" }}
                         cover={<img alt="example" style={{height:"auto",width:"100%"}} src="https://about.netflix.com/images/meta/netflix-symbol-black.png" />}
                     >
                         <Meta title={title} description={desc} />
                     </Card>
+                    </>
                 </Row>
                 <Row gutter={16}>
-                    <Col span={6}>
-                    <Card
-                        hoverable
-                        style={{ width: "100%" }}
-                        cover={<img alt="example" style={{height:"auto",width:"100%"}} src="https://about.netflix.com/images/meta/netflix-symbol-black.png" />}
-                    >
-                        <Meta title="Europe Street beat" description="Recomended" />
-                    </Card>
+                    <Col span={6} style={{display:"flex", justifyContent:"center",textAlign:"left"}}>
+                        <>
+                        <Card
+                            hoverable
+                            style={{ width: "80%" }}
+                            cover={<img alt="example" style={{height:"auto",width:"100%"}} src="https://about.netflix.com/images/meta/netflix-symbol-black.png" />}
+                        >
+                            <Meta title="Europe Street beat" description="Recomended" />
+                        </Card>
+                        </>
                     </Col>
-                    <Col span={6}>
-                    <Card
-                        hoverable
-                        style={{ width: "100%" }}
-                        cover={<img alt="example" style={{height:"auto",width:"100%"}} src="https://about.netflix.com/images/meta/netflix-symbol-black.png" />}
-                    >
-                        <Meta title="Europe Street beat" description="Recomended" />
-                    </Card>
+                    <Col span={6} style={{display:"flex", justifyContent:"center",textAlign:"left"}}>
+                        <>
+                        <Card
+                            hoverable
+                            style={{ width: "80%" }}
+                            cover={<img alt="example" style={{height:"auto",width:"100%"}} src="https://about.netflix.com/images/meta/netflix-symbol-black.png" />}
+                        >
+                            <Meta title="Europe Street beat" description="Recomended" />
+                        </Card>
+                        </>
                     </Col>
-                    <Col span={6}>
-                    <Card
-                        hoverable
-                        style={{ width: "100%" }}
-                        cover={<img alt="example" style={{height:"auto",width:"100%"}} src="https://about.netflix.com/images/meta/netflix-symbol-black.png" />}
-                    >
-                        <Meta title="Europe Street beat" description="Recomended" />
-                    </Card>
+                    <Col span={6} style={{display:"flex", justifyContent:"center",textAlign:"left"}}>
+                        <>
+                        <Card
+                            hoverable
+                            style={{ width: "80%" }}
+                            cover={<img alt="example" style={{height:"auto",width:"100%"}} src="https://about.netflix.com/images/meta/netflix-symbol-black.png" />}
+                        >
+                            <Meta title="Europe Street beat" description="Recomended" />
+                        </Card>
+                        </>
                     </Col>
-                    <Col span={6}>
-                    <Card
-                        hoverable
-                        style={{ width: "100%" }}
-                        cover={<img alt="example" style={{height:"auto",width:"100%"}} src="https://about.netflix.com/images/meta/netflix-symbol-black.png" />}
-                    >
-                        <Meta title="Europe Street beat" description="Recomended" />
-                    </Card>
+                    <Col span={6} style={{display:"flex", justifyContent:"center",textAlign:"left"}}>
+                        <>
+                        <Card
+                            hoverable
+                            style={{ width: "80%" }}
+                            cover={<img alt="example" style={{height:"auto",width:"100%"}} src="https://about.netflix.com/images/meta/netflix-symbol-black.png" />}
+                        >
+                            <Meta title="Europe Street beat" description="Recomended" />
+                        </Card>
+                        </>
                     </Col>
                 </Row>
             </Card>
