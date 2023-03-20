@@ -58,6 +58,7 @@ export default function FilmsTsx(props: Props) {
       setTitle(listOfFilms[parseInt(selectedRowKeys[0])].title);
       setDesc(listOfFilms[parseInt(selectedRowKeys[0])].overview);
       setImg(listOfFilms[parseInt(selectedRowKeys[0])].backdrop_path);
+      console.log(selectedRowKeys[0]);
       setSelectedRowKey(selectedRowKeys[0]);
     },
     onSelect: (record: Film, selected: boolean, selectedRows: Film[]) => {},
@@ -73,7 +74,7 @@ export default function FilmsTsx(props: Props) {
             columns={columns}
             rowSelection={rowSelectionNew}
             pagination={{
-              pageSize: 5,
+              pageSize: 10,
             }}
           />
         </Col>
