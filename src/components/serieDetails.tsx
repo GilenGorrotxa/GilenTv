@@ -2,24 +2,27 @@ import React, { useState, useEffect } from "react";
 import { Row, Col,Card} from "antd";
 const { Meta } = Card;
 
-interface Film {
-    title: string;
-    backdrop_path: string;
-    overview: string;
-    img:string;
-}
 
-export default function RenderFilmCardTsx(props) {
+interface Series {
+    name: string;
+    overview: string;
+    backdrop_path: string;
+    key: string;
+    vote_average: number;
+    img:string;
+  }
+
+export default function RenderSeriesCardTsx(props) {
     
-    const [films, setFilms] = useState<Film[]>([]);
+    const [series, setSeries] = useState<Series[]>([]);
     const [title, setTitle] = useState<string>("");
     const [desc, setDesc] = useState<string>("");
     const [img, setImg] = useState<string>("");
 
     useEffect(() => {
-        /* Update the information of the details card with the props and create the list of recommended films*/
-        let recomend = props.films.map(film => ({ title: film.title, img: film.backdrop_path, desc:film.overview }));
-        setFilms(recomend);
+        /* Update the information of the details card with the props and create the list of recommended series*/
+        let recomend = props.films.map(serie => ({ title: serie.name, img: serie.backdrop_path, desc:serie.overview }));
+        setSeries(recomend);
         setTitle(props.title?props.title:"");
         setDesc(props.desc?props.desc:"")
         setImg(props.img?"https://image.tmdb.org/t/p/w500/"+props.img:"https://picemup.com/img/logoRecomend.jpg")
@@ -47,9 +50,9 @@ export default function RenderFilmCardTsx(props) {
                         <Card
                             hoverable
                             style={{ width:"90%" }}
-                            cover={<img alt="example" style={{height:"auto",width:"100%"}} src={films && films.length>0?"https://image.tmdb.org/t/p/w500/"+films[0].img:"https://picemup.com/img/logoRecomend.jpg"} />}
+                            cover={<img alt="example" style={{height:"auto",width:"100%"}} src={series && series.length>0?"https://image.tmdb.org/t/p/w500/"+series[0].img:"https://picemup.com/img/logoRecomend.jpg"} />}
                         >
-                            <Meta title={films && films.length>0?films[0].title:""} description="Recommended" />
+                            <Meta title={series && series.length>0?series[0].name:""} description="Recommended" />
                         </Card>
                         </>
                     </Col>
@@ -58,9 +61,9 @@ export default function RenderFilmCardTsx(props) {
                         <Card
                             hoverable
                             style={{ width:"90%" }}
-                            cover={<img alt="example" style={{height:"auto",width:"100%"}} src={films && films.length>0?"https://image.tmdb.org/t/p/w500/"+films[1].img:"https://picemup.com/img/logoRecomend.jpg"} />}
+                            cover={<img alt="example" style={{height:"auto",width:"100%"}} src={series && series.length>0?"https://image.tmdb.org/t/p/w500/"+series[1].img:"https://picemup.com/img/logoRecomend.jpg"} />}
                         >
-                            <Meta title={films && films.length>0?films[1].title:""} description="Recommended" />
+                            <Meta title={series && series.length>0?series[1].name:""} description="Recommended" />
                         </Card>
                         </>
                     </Col>
@@ -69,9 +72,9 @@ export default function RenderFilmCardTsx(props) {
                         <Card
                             hoverable
                             style={{ width:"90%" }}
-                            cover={<img alt="example" style={{height:"auto",width:"100%"}} src={films && films.length>0?"https://image.tmdb.org/t/p/w500/"+films[2].img:"https://picemup.com/img/logoRecomend.jpg"} />}
+                            cover={<img alt="example" style={{height:"auto",width:"100%"}} src={series && series.length>0?"https://image.tmdb.org/t/p/w500/"+series[2].img:"https://picemup.com/img/logoRecomend.jpg"} />}
                         >
-                            <Meta title={films && films.length>0?films[2].title:""} description="Recommended" />
+                            <Meta title={series && series.length>0?series[2].name:""} description="Recommended" />
                         </Card>
                         </>
                     </Col>
@@ -80,9 +83,9 @@ export default function RenderFilmCardTsx(props) {
                         <Card
                             hoverable
                             style={{ width:"90%" }}
-                            cover={<img alt="example" style={{height:"auto",width:"100%"}} src={films && films.length>0?"https://image.tmdb.org/t/p/w500/"+films[3].img:"https://picemup.com/img/logoRecomend.jpg"} />}
+                            cover={<img alt="example" style={{height:"auto",width:"100%"}} src={series && series.length>0?"https://image.tmdb.org/t/p/w500/"+series[3].img:"https://picemup.com/img/logoRecomend.jpg"} />}
                         >
-                            <Meta title={films && films.length>0?films[3].title:""} description="Recomended" />
+                            <Meta title={series && series.length>0?series[3].name:""} description="Recomended" />
                         </Card>
                         </>
                     </Col>
