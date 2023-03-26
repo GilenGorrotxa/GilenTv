@@ -63,11 +63,11 @@ export default function RenderFilmCardTsx(props) {
                     {recomendedFilms.map(
                         (film: RecommendedFilm, index: number) => {
                             return <>
-                            <Col span={6} style={{display:"flex", justifyContent:"center",textAlign:"left"}}>
+                            <Col xs={24} xl={6} style={{display:"flex", justifyContent:"center",textAlign:"left"}}>
                                 <>
                                 <Card
                                     hoverable
-                                    style={{ width:"90%" }}
+                                    style={{ width:"90%",marginBottom:10 }}
                                     cover={<img alt="example" style={{height:"auto",width:"100%"}} src={film.img?"https://image.tmdb.org/t/p/w500/"+film.img:"https://picemup.com/img/logoRecomend.jpg"} />}
                                 >
                                     <Meta title={film.title} description="Recommended" />

@@ -65,11 +65,11 @@ export default function RenderSeriesCardTsx(props) {
                 {series.map(
                     (serie: RecommendedSeries, index: number) => {
                         return <>
-                        <Col span={6} style={{display:"flex", justifyContent:"center",textAlign:"left"}}>
+                        <Col xs={24} xl={6} style={{display:"flex", justifyContent:"center",textAlign:"left"}}>
                             <>
                             <Card
                                 hoverable
-                                style={{ width:"90%" }}
+                                style={{ width:"90%", marginBottom:10 }}
                                 cover={<img alt="example" style={{height:"auto",width:"100%"}} src={serie.img?"https://image.tmdb.org/t/p/w500/"+serie.img:"https://picemup.com/img/logoRecomend.jpg"} />}
                             >
                                 <Meta title={serie.title} description="Recommended" />
@@ -79,50 +79,6 @@ export default function RenderSeriesCardTsx(props) {
                         </>;
                     })
                 }
-                    {/* <Col span={6} style={{display:"flex", justifyContent:"center",textAlign:"left"}}>
-                        <>
-                        <Card
-                            hoverable
-                            style={{ width:"90%" }}
-                            cover={<img alt="example" style={{height:"auto",width:"100%"}} src={series && series.length>0?"https://image.tmdb.org/t/p/w500/"+series[0].img:"https://picemup.com/img/logoRecomend.jpg"} />}
-                        >
-                            <Meta title={series && series.length>0?series[0].name:""} description="Recommended" />
-                        </Card>
-                        </>
-                    </Col>
-                    <Col span={6} style={{display:"flex", justifyContent:"center",textAlign:"left"}}>
-                        <>
-                        <Card
-                            hoverable
-                            style={{ width:"90%" }}
-                            cover={<img alt="example" style={{height:"auto",width:"100%"}} src={series && series.length>0?"https://image.tmdb.org/t/p/w500/"+series[1].img:"https://picemup.com/img/logoRecomend.jpg"} />}
-                        >
-                            <Meta title={series && series.length>0?series[1].name:""} description="Recommended" />
-                        </Card>
-                        </>
-                    </Col>
-                    <Col span={6} style={{display:"flex", justifyContent:"center",textAlign:"left"}}>
-                        <>
-                        <Card
-                            hoverable
-                            style={{ width:"90%" }}
-                            cover={<img alt="example" style={{height:"auto",width:"100%"}} src={series && series.length>0?"https://image.tmdb.org/t/p/w500/"+series[2].img:"https://picemup.com/img/logoRecomend.jpg"} />}
-                        >
-                            <Meta title={series && series.length>0?series[2].name:""} description="Recommended" />
-                        </Card>
-                        </>
-                    </Col>
-                    <Col span={6} style={{display:"flex", justifyContent:"center",textAlign:"left"}}>
-                        <>
-                        <Card
-                            hoverable
-                            style={{ width:"90%" }}
-                            cover={<img alt="example" style={{height:"auto",width:"100%"}} src={series && series.length>0?"https://image.tmdb.org/t/p/w500/"+series[3].img:"https://picemup.com/img/logoRecomend.jpg"} />}
-                        >
-                            <Meta title={series && series.length>0?series[3].name:""} description="Recomended" />
-                        </Card>
-                        </>
-                    </Col> */}
                 </Row>
             </Card>
     )
