@@ -9,6 +9,7 @@ interface Film {
   backdrop_path: string;
   key: string;
   vote_average: number;
+  id:number;
 }
 
 interface Series {
@@ -17,6 +18,7 @@ interface Series {
   backdrop_path: string;
   key: string;
   vote_average: number;
+  id:number;
 }
 
 interface Props {}
@@ -28,15 +30,14 @@ export default function FilmsTsx(props: Props) {
   const [title, setTitle] = useState<string>("");
   const [desc, setDesc] = useState<string>("");
   const [img, setImg] = useState<string>("");
+  const [id, setId] = useState<number>(0);
   const [filter,setFilter]=useState(0);
   const [selectedRowKey,setSelectedRowKey]=useState<Key[]>([0]);
-  const [selectedRow,setSelectedRow]=useState<Film[]>([]);
-  const [selectedRowSeries,setSelectedRowSeries]=useState<Series[]>([]);
 
   /* Get the list of the films from the API*/
   useEffect(() => {
     fetch(
-      "https://api.themoviedb.org/3/movie/popular?api_key=ccb8c4972a273f9f96b565be82743d4c"
+      "https://api.themoviedb.org/3/movie/top_rated?api_key=ccb8c4972a273f9f96b565be82743d4c"
     )
       .then((response) => response.json())
       .then((data) => {
@@ -50,7 +51,7 @@ export default function FilmsTsx(props: Props) {
       });
 
     fetch(
-      "https://api.themoviedb.org/3/tv/popular?api_key=ccb8c4972a273f9f96b565be82743d4c"
+      "https://api.themoviedb.org/3/tv/top_rated?api_key=ccb8c4972a273f9f96b565be82743d4c"
     )
       .then((response) => response.json())
       .then((data) => {
@@ -60,7 +61,6 @@ export default function FilmsTsx(props: Props) {
             key: index.toString(),
           };
         });
-        console.log(series);
         setListOfSeries(series);
       });
   }, []);
@@ -91,24 +91,22 @@ export default function FilmsTsx(props: Props) {
 
   const rowSelection = {
     onChange: (selectedRowKeys: React.Key[], selectedRows: Film[]) => {
-      console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
       setSelectedRowKey(selectedRowKeys);
-      setSelectedRow(selectedRows);
       setTitle(selectedRows[0].title);
       setDesc(selectedRows[0].overview);
       setImg(selectedRows[0].backdrop_path);
+      setId(selectedRows[0].id);
       setSelected(true);
     },
   };
 
   const rowSelectionSeries = {
     onChange: (selectedRowKeys: React.Key[], selectedRows: Series[]) => {
-      console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
       setSelectedRowKey(selectedRowKeys);
-      setSelectedRowSeries(selectedRows);
       setTitle(selectedRows[0].name);
       setDesc(selectedRows[0].overview);
       setImg(selectedRows[0].backdrop_path);
+      setId(selectedRows[0].id);
       setSelected(true);
     },
   };
@@ -127,7 +125,6 @@ export default function FilmsTsx(props: Props) {
       setSelected(false);
     }
     setSelectedRowKey([]);
-    setSelectedRow([]);
   };
 
   return(
@@ -169,7 +166,7 @@ export default function FilmsTsx(props: Props) {
           {/* Show the detail card of the selected film or show the main page with a crousel of images */}
           {selected
           ?
-            filter===0?<RenderFilmCardTsx img={img} title={title} desc={desc} films={listOfFilms}/>:<RenderSeriesCardTsx img={img} title={title} desc={desc} films={listOfSeries}/>
+            filter===0?<RenderFilmCardTsx img={img} title={title} desc={desc} films={listOfFilms} id={id}/>:<RenderSeriesCardTsx img={img} title={title} desc={desc} id={id} films={listOfSeries}/>
           :<>
             <Card
                   style={{boxShadow:"0 8px 8px -2px lightgray", backgroundColor:"whitesmoke",width:"90%", textAlign:"center"}}
