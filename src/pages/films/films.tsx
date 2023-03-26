@@ -29,6 +29,9 @@ export default function FilmsTsx(props: Props) {
   const [desc, setDesc] = useState<string>("");
   const [img, setImg] = useState<string>("");
   const [filter,setFilter]=useState(0);
+  const [selectedRowKey,setSelectedRowKey]=useState<Key[]>([0]);
+  const [selectedRow,setSelectedRow]=useState<Film[]>([]);
+  const [selectedRowSeries,setSelectedRowSeries]=useState<Series[]>([]);
 
   /* Get the list of the films from the API*/
   useEffect(() => {
@@ -86,6 +89,30 @@ export default function FilmsTsx(props: Props) {
     }
   ];
 
+  const rowSelection = {
+    onChange: (selectedRowKeys: React.Key[], selectedRows: Film[]) => {
+      console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+      setSelectedRowKey(selectedRowKeys);
+      setSelectedRow(selectedRows);
+      setTitle(selectedRows[0].title);
+      setDesc(selectedRows[0].overview);
+      setImg(selectedRows[0].backdrop_path);
+      setSelected(true);
+    },
+  };
+
+  const rowSelectionSeries = {
+    onChange: (selectedRowKeys: React.Key[], selectedRows: Series[]) => {
+      console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+      setSelectedRowKey(selectedRowKeys);
+      setSelectedRowSeries(selectedRows);
+      setTitle(selectedRows[0].name);
+      setDesc(selectedRows[0].overview);
+      setImg(selectedRows[0].backdrop_path);
+      setSelected(true);
+    },
+  };
+
   const onChangeSwitch = (checked: boolean) => {
     setFilter(checked?0:1);
     if(checked){
@@ -99,6 +126,8 @@ export default function FilmsTsx(props: Props) {
       setImg(listOfSeries[0].backdrop_path);
       setSelected(false);
     }
+    setSelectedRowKey([]);
+    setSelectedRow([]);
   };
 
   return(
@@ -113,14 +142,9 @@ export default function FilmsTsx(props: Props) {
             columns={columns}
             style={{width:"90%"}}
             rowSelection={{
-              type:'radio',
-              /* Change the information of the details card with the information of the selected film*/
-              onChange:((selectedRowKeys: any, selectedRows: Film[]) => {
-                setTitle(listOfFilms[parseInt(selectedRowKeys[0])].title);
-                setDesc(listOfFilms[parseInt(selectedRowKeys[0])].overview);
-                setImg(listOfFilms[parseInt(selectedRowKeys[0])].backdrop_path);
-                setSelected(true);
-              }) 
+              selectedRowKeys:selectedRowKey,
+              type: 'radio',
+              ...rowSelection,
             }}
             pagination={{
               pageSize: 5,
@@ -129,15 +153,11 @@ export default function FilmsTsx(props: Props) {
           <Table
             dataSource={listOfSeries}
             columns={columnsSeries}
+            style={{width:"90%"}}
             rowSelection={{
-              type:'radio',
-              /* Change the information of the details card with the information of the selected serie*/
-              onChange:((selectedRowKeys: any, selectedRows: Series[]) => {
-                setTitle(listOfSeries[parseInt(selectedRowKeys[0])].name);
-                setDesc(listOfSeries[parseInt(selectedRowKeys[0])].overview);
-                setImg(listOfSeries[parseInt(selectedRowKeys[0])].backdrop_path);
-                setSelected(true);
-              }) 
+              selectedRowKeys:selectedRowKey,
+              type: 'radio',
+              ...rowSelectionSeries,
             }}
             pagination={{
               pageSize: 5,
